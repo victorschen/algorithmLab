@@ -16,12 +16,14 @@ int main(void)
     if(pipe(pipe1) < 0 || pipe(pipe2) < 0)
     {
         perror("pipe:");
+        return 0;
         //exit(-1);
     }
 
     if((childpid = fork()) < 0)
     {
         perror("fork:");
+        return 0;
         //exit(-1);
     }
 
@@ -35,6 +37,7 @@ int main(void)
     close(pipe1[0]);
     close(pipe2[1]);
     client(pipe2[0],pipe1[1]);
+    //waidpid(childpid, NULL, 0);
 
     return 0;
 }
